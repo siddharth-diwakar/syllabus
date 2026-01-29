@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Manrope, Space_Grotesk } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
@@ -9,12 +9,18 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "Caddy",
+  description: "A clean workspace for shipping RAG-powered ideas.",
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-display",
+  display: "swap",
+  subsets: ["latin"],
+});
+
+const manrope = Manrope({
+  variable: "--font-body",
   display: "swap",
   subsets: ["latin"],
 });
@@ -26,7 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
+      <body
+        className={`${manrope.variable} ${spaceGrotesk.variable} font-body antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

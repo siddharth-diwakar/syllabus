@@ -1,57 +1,72 @@
-import { DeployButton } from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
-import { AuthButton } from "@/components/auth-button";
-import { Hero } from "@/components/hero";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { ConnectSupabaseSteps } from "@/components/tutorial/connect-supabase-steps";
-import { SignUpUserSteps } from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/lib/utils";
 import Link from "next/link";
-import { Suspense } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { CaddyNavbar } from "@/components/caddy-navbar";
+import { Demo } from "@/components/demo";
+import { Button } from "@/components/ui/button";
+
+const backdropImage =
+  "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66?auto=format&fit=crop&w=1800&q=80";
 
 export default function Home() {
   return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-          <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-            <div className="flex gap-5 items-center font-semibold">
-              <Link href={"/"}>Next.js Supabase Starter</Link>
-              <div className="flex items-center gap-2">
-                <DeployButton />
+    <main className="relative min-h-screen overflow-hidden bg-[#0b0b10] text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `url(${backdropImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(236,72,153,0.2),_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(56,189,248,0.18),_transparent_45%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/60 to-black" />
+      </div>
+
+      <div className="relative z-10">
+        <CaddyNavbar />
+
+        <section className="mx-auto flex w-full max-w-6xl flex-col gap-12 px-6 pb-20 pt-6 lg:pt-12">
+          <div className="grid items-start gap-12 lg:grid-cols-[1.05fr_1fr]">
+            <div className="space-y-7">
+              <div className="space-y-5 animate-in fade-in slide-in-from-left-6 duration-700 delay-100">
+                <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+                  Campus Ops Agent for students who want zero surprises.
+                </h1>
+                <p className="text-base text-white/70 sm:text-lg">
+                  Drop in PDFs, LMS announcements, emails, or screenshots. Caddy
+                  extracts dates, policies, and assignments with citations, then
+                  builds an auditable calendar and task plan you can approve
+                  before anything changes.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-3 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-200">
+                <Button asChild className="bg-white text-black hover:bg-white/90">
+                  <Link href="/auth/sign-up">
+                    Build my plan
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="border border-white/15 text-white hover:bg-white/10"
+                >
+                  <Link href="/auth/login">See a sample workflow</Link>
+                </Button>
+              </div>
+
+            </div>
+
+            <div className="rounded-3xl border border-white/10 bg-black/40 p-4 shadow-2xl backdrop-blur animate-in fade-in slide-in-from-right-6 duration-700 delay-200">
+              <div className="dark">
+                <Demo />
               </div>
             </div>
-            {!hasEnvVars ? (
-              <EnvVarWarning />
-            ) : (
-              <Suspense>
-                <AuthButton />
-              </Suspense>
-            )}
           </div>
-        </nav>
-        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
-          <Hero />
-          <main className="flex-1 flex flex-col gap-6 px-4">
-            <h2 className="font-medium text-xl mb-4">Next steps</h2>
-            {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-          </main>
-        </div>
-
-        <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-          <p>
-            Powered by{" "}
-            <a
-              href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-              target="_blank"
-              className="font-bold hover:underline"
-              rel="noreferrer"
-            >
-              Supabase
-            </a>
-          </p>
-          <ThemeSwitcher />
-        </footer>
+        </section>
       </div>
     </main>
   );
