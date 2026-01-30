@@ -20,6 +20,8 @@ export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const cardClass =
+    "border-white/10 bg-black/50 text-white shadow-2xl backdrop-blur";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -44,7 +46,7 @@ export function SignUpForm({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/protected`,
+          emailRedirectTo: `${window.location.origin}/`,
         },
       });
       if (error) throw error;
@@ -58,7 +60,7 @@ export function SignUpForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className={cardClass}>
         <CardHeader>
           <CardTitle className="text-2xl">Sign up</CardTitle>
           <CardDescription>Create a new account</CardDescription>

@@ -22,32 +22,50 @@ export async function CaddyNavbar() {
         </Link>
 
         <div className="flex items-center gap-2">
-          {!user && (
-            <Button
-              asChild
-              size="sm"
-              variant="outline"
-              className="border-white/20 bg-white/5 text-white hover:bg-white/10"
-            >
-              <Link href="/auth/sign-up">Sign up</Link>
-            </Button>
-          )}
           {user ? (
-            <LogoutButton
-              size="sm"
-              variant="outline"
-              className="border-white/20 bg-white/5 text-white hover:bg-white/10"
-              label="Sign out"
-            />
+            <>
+              <Button
+                asChild
+                size="sm"
+                variant="ghost"
+                className="text-white hover:bg-white/10 hover:text-white"
+              >
+                <Link href="/upload">Upload</Link>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                variant="ghost"
+                className="text-white hover:bg-white/10 hover:text-white"
+              >
+                <Link href="/schedule">Schedule</Link>
+              </Button>
+              <LogoutButton
+                size="sm"
+                variant="outline"
+                className="border-white/20 bg-white/5 text-white hover:bg-white/10"
+                label="Sign out"
+              />
+            </>
           ) : (
-            <Button
-              asChild
-              size="sm"
-              variant="ghost"
-              className="text-white hover:bg-white/10 hover:text-white"
-            >
-              <Link href="/auth/login">Sign in</Link>
-            </Button>
+            <>
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                className="border-white/20 bg-white/5 text-white hover:bg-white/10"
+              >
+                <Link href="/auth/sign-up">Sign up</Link>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                variant="ghost"
+                className="text-white hover:bg-white/10 hover:text-white"
+              >
+                <Link href="/auth/login">Sign in</Link>
+              </Button>
+            </>
           )}
           <Button
             asChild

@@ -20,6 +20,8 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const cardClass =
+    "border-white/10 bg-black/50 text-white shadow-2xl backdrop-blur";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -38,8 +40,8 @@ export function LoginForm({
         password,
       });
       if (error) throw error;
-      // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push("/protected");
+      // Redirect to the homepage after login.
+      router.push("/");
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -49,7 +51,7 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className={cardClass}>
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
