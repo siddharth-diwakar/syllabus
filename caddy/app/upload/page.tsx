@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { CaddyNavbar } from "@/components/caddy-navbar";
-import { Demo } from "@/components/demo";
+import { PdfUpload } from "@/components/pdf-upload";
 
 export default async function UploadPage() {
   const supabase = await createClient();
@@ -25,12 +25,7 @@ export default async function UploadPage() {
               and tasks with citations before anything is created.
             </p>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-black/40 p-4 shadow-2xl backdrop-blur">
-            <div className="dark">
-              <Demo />
-            </div>
-          </div>
-
+          <PdfUpload />
         </section>
       </div>
     </main>
